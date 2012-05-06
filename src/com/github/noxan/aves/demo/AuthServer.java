@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.github.noxan.aves.auth.AuthException;
 import com.github.noxan.aves.auth.accessor.UsernamePassword;
 import com.github.noxan.aves.auth.accessor.UsernamePasswordAccessor;
+import com.github.noxan.aves.auth.session.SessionManager;
 import com.github.noxan.aves.auth.storage.InMemoryUsernamePasswordStorage;
 import com.github.noxan.aves.net.Connection;
 import com.github.noxan.aves.server.Server;
@@ -22,10 +23,12 @@ public class AuthServer extends ServerAdapter {
     }
 
     private InMemoryUsernamePasswordStorage userStorage;
+    private SessionManager manager;
 
     public AuthServer() {
         userStorage = new InMemoryUsernamePasswordStorage();
         userStorage.addUser("noxan", "123");
+        manager = new SessionManager(userStorage);
     }
 
     @Override
