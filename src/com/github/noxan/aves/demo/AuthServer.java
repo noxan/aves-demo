@@ -43,8 +43,11 @@ public class AuthServer extends ServerAdapter {
                 if (args.length > 1) {
                     UsernamePasswordAccessor accessor = new UsernamePassword(args[0], args[1]);
                     try {
-                        String user = userStorage.requestUser(accessor);
-                        connection.write("WELCOME " + user);
+                        if (manager.requestSession(accessor, connection)) {
+                            connection.write("Welcome to your session");
+                        } else {
+                            connection.write("LOGIN ERROR: Session");
+                        }
                     } catch (AuthException e) {
                         connection.write("LOGIN ERROR: " + e.getMessage());
                     }
