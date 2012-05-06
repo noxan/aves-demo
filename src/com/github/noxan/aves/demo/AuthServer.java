@@ -33,22 +33,22 @@ public class AuthServer extends ServerAdapter {
 
     @Override
     public void readData(Connection connection, Object data) {
-        String parts[] = ((String) data).trim().split(" ");
+        String parts[] = ((String)data).trim().split(" ");
         String message = parts[0].toUpperCase();
         String[] args = new String[parts.length - 1];
         System.arraycopy(parts, 1, args, 0, args.length);
         try {
-            switch (message) {
+            switch(message) {
             case "LOGIN":
-                if (args.length > 1) {
+                if(args.length > 1) {
                     UsernamePasswordAccessor accessor = new UsernamePassword(args[0], args[1]);
                     try {
-                        if (manager.requestSession(accessor, connection)) {
+                        if(manager.requestSession(accessor, connection)) {
                             connection.write("Welcome to your session");
                         } else {
                             connection.write("LOGIN ERROR: Session");
                         }
-                    } catch (AuthException e) {
+                    } catch(AuthException e) {
                         connection.write("LOGIN ERROR: " + e.getMessage());
                     }
                 } else {
@@ -59,7 +59,7 @@ public class AuthServer extends ServerAdapter {
                 connection.write("Not implemented yet!");
                 break;
             }
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }

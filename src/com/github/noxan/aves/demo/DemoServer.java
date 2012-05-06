@@ -17,7 +17,7 @@ public class DemoServer implements ServerHandler {
         Server server = new SocketServer(new DemoServer());
         try {
             server.start();
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
