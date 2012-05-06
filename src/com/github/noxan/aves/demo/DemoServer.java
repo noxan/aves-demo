@@ -5,20 +5,21 @@
 
 package com.github.noxan.aves.demo;
 
+import java.io.IOException;
+
 import com.github.noxan.aves.net.Connection;
+import com.github.noxan.aves.server.Server;
 import com.github.noxan.aves.server.ServerHandler;
 import com.github.noxan.aves.server.SocketServer;
 
 public class DemoServer implements ServerHandler {
     public static void main(String[] args) {
-	new DemoServer();
-    }
-
-    private SocketServer server;
-
-    public DemoServer() {
-	server = new SocketServer(this);
-	server.start();
+        Server server = new SocketServer(new DemoServer());
+        try {
+            server.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
