@@ -7,12 +7,18 @@ import com.github.noxan.aves.auth.accessor.UsernamePassword;
 import com.github.noxan.aves.auth.accessor.UsernamePasswordAccessor;
 import com.github.noxan.aves.auth.storage.InMemoryUsernamePasswordStorage;
 import com.github.noxan.aves.net.Connection;
+import com.github.noxan.aves.server.Server;
 import com.github.noxan.aves.server.ServerAdapter;
 import com.github.noxan.aves.server.SocketServer;
 
 public class AuthServer extends ServerAdapter {
     public static void main(String[] args) {
-        new AuthServer();
+        Server server = new SocketServer(new AuthServer());
+        try {
+            server.start();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private InMemoryUsernamePasswordStorage userStorage;
@@ -20,9 +26,6 @@ public class AuthServer extends ServerAdapter {
     public AuthServer() {
         userStorage = new InMemoryUsernamePasswordStorage();
         userStorage.addUser("noxan", "123");
-
-        SocketServer server = new SocketServer(this);
-        server.start();
     }
 
     @Override
