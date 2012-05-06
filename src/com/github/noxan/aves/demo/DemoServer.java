@@ -24,21 +24,21 @@ public class DemoServer implements ServerHandler {
 
     @Override
     public void readData(Connection connection, Object data) {
-	System.out.println(connection + ": " + data);
+        System.out.println(connection + ": " + data);
     }
 
     @Override
     public void clientConnect(Connection connection) {
-	System.out.println(connection + " connect");
+        System.out.println(connection + " connect");
     }
 
     @Override
     public void clientDisconnect(Connection connection) {
-	System.out.println(connection + " disconnect");
+        System.out.println(connection + " disconnect");
     }
 
     @Override
     public void clientLost(Connection connection) {
-	System.out.println(connection + " lost");
+        System.out.println(connection + " lost");
     }
 }
