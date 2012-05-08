@@ -8,6 +8,7 @@ package com.github.noxan.aves.demo;
 import java.io.IOException;
 
 import com.github.noxan.aves.auth.AuthException;
+import com.github.noxan.aves.auth.User;
 import com.github.noxan.aves.auth.accessor.UsernamePassword;
 import com.github.noxan.aves.auth.accessor.UsernamePasswordAccessor;
 import com.github.noxan.aves.auth.session.SessionManager;
@@ -48,11 +49,8 @@ public class AuthServer extends ServerAdapter {
                     if(args.length > 1) {
                         UsernamePasswordAccessor accessor = new UsernamePassword(args[0], args[1]);
                         try {
-                            if(manager.requestSession(accessor, connection)) {
-                                connection.write("Welcome to your session");
-                            } else {
-                                connection.write("LOGIN ERROR: Session");
-                            }
+                            User user = manager.requestSession(accessor, connection);
+                            connection.write("Welcome " + user.getUsername() + "!");
                         } catch(AuthException e) {
                             connection.write("LOGIN ERROR: " + e.getMessage());
                         }
