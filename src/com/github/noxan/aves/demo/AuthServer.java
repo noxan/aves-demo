@@ -44,25 +44,25 @@ public class AuthServer extends ServerAdapter {
         System.arraycopy(parts, 1, args, 0, args.length);
         try {
             switch(message) {
-            case "LOGIN":
-                if(args.length > 1) {
-                    UsernamePasswordAccessor accessor = new UsernamePassword(args[0], args[1]);
-                    try {
-                        if(manager.requestSession(accessor, connection)) {
-                            connection.write("Welcome to your session");
-                        } else {
-                            connection.write("LOGIN ERROR: Session");
+                case "LOGIN":
+                    if(args.length > 1) {
+                        UsernamePasswordAccessor accessor = new UsernamePassword(args[0], args[1]);
+                        try {
+                            if(manager.requestSession(accessor, connection)) {
+                                connection.write("Welcome to your session");
+                            } else {
+                                connection.write("LOGIN ERROR: Session");
+                            }
+                        } catch(AuthException e) {
+                            connection.write("LOGIN ERROR: " + e.getMessage());
                         }
-                    } catch(AuthException e) {
-                        connection.write("LOGIN ERROR: " + e.getMessage());
+                    } else {
+                        connection.write("LOGIN ERROR: Invalid parameter(s)");
                     }
-                } else {
-                    connection.write("LOGIN ERROR: Invalid parameter(s)");
-                }
-                break;
-            case "LOGOUT":
-                connection.write("Not implemented yet!");
-                break;
+                    break;
+                case "LOGOUT":
+                    connection.write("Not implemented yet!");
+                    break;
             }
         } catch(IOException e) {
             e.printStackTrace();
