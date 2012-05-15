@@ -19,6 +19,14 @@ public class ChatClient extends ClientAdapter {
         gui = new ChatClientGUI(this);
     }
 
+    public void login(String username, String password) {
+        try {
+            client.write("login;" + username + ";" + password + "\n");
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void connect() {
         try {
             client.connect();
