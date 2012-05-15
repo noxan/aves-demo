@@ -30,6 +30,7 @@ public class ChatClient extends ClientAdapter {
     public void connect() {
         try {
             client.connect();
+            gui.setStatus(ChatClientStatus.CONNECT);
         } catch(IOException e) {
             e.printStackTrace();
         }
