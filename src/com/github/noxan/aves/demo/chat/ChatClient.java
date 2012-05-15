@@ -17,6 +17,9 @@ public class ChatClient extends ClientAdapter {
     public ChatClient() {
         client = new SocketClient(this);
         gui = new ChatClientGUI(this);
+    }
+
+    public void connect() {
         try {
             client.connect();
         } catch(IOException e) {
