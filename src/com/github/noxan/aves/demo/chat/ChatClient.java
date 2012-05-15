@@ -34,4 +34,12 @@ public class ChatClient extends ClientAdapter {
             e.printStackTrace();
         }
     }
+
+    public void chat(String text) {
+        try {
+            client.write("chat;" + text);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
