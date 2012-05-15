@@ -5,13 +5,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.github.noxan.aves.net.Connection;
-import com.github.noxan.aves.server.Server;
 import com.github.noxan.aves.server.ServerHandler;
 import com.github.noxan.aves.server.SocketServer;
 
 public class ChatServer implements ServerHandler {
     public static void main(String[] args) {
-        Server server = new SocketServer(new ChatServer());
+        ChatServer server = new ChatServer();
         try {
             server.start();
         } catch(IOException e) {
