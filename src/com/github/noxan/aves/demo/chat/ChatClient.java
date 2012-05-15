@@ -8,6 +8,7 @@ import com.github.noxan.aves.client.SocketClient;
 
 public class ChatClient extends ClientAdapter {
     private SocketClient client;
+    private ChatClientGUI gui;
 
     public static void main(String[] args) {
         new ChatClient();
@@ -15,6 +16,7 @@ public class ChatClient extends ClientAdapter {
 
     public ChatClient() {
         client = new SocketClient(this);
+        gui = new ChatClientGUI(this);
         try {
             client.connect();
         } catch(IOException e) {
