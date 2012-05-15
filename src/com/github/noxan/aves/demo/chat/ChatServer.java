@@ -33,6 +33,8 @@ public class ChatServer implements ServerHandler {
 
     public ChatServer() {
         storage = new InMemoryUsernamePasswordStorage();
+        storage.addUser("noxan", "123");
+        storage.addUser("test", "1234");
         sessionManager = new SessionManager(storage);
         server = new SocketServer(this);
     }
