@@ -63,6 +63,10 @@ public class ChatClientGUI {
         }
     }
 
+    public void chat(String username, String text) {
+        chatPanel.addChatText(username + ": " + text);
+    }
+
     private class ConnectPanel extends JPanel {
         private static final long serialVersionUID = -8154588851543816456L;
 
