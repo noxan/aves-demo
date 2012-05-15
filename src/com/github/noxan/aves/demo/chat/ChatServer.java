@@ -25,9 +25,12 @@ public class ChatServer implements ServerHandler {
     private InMemoryUsernamePasswordStorage storage;
     private SessionManager sessionManager;
 
+    private SocketServer server;
+
     public ChatServer() {
         storage = new InMemoryUsernamePasswordStorage();
         sessionManager = new SessionManager(storage);
+        server = new SocketServer(this);
     }
 
     public void start() throws IOException {
