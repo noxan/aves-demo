@@ -42,4 +42,12 @@ public class ChatClient extends ClientAdapter {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void readData(Client client, Object data) {
+        String parts[] = ((String)data).trim().split(";");
+        String message = parts[0].toLowerCase();
+        String[] args = new String[parts.length - 1];
+        System.arraycopy(parts, 1, args, 0, args.length);
+    }
 }
