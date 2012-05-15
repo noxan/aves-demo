@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.github.noxan.aves.auth.session.SessionManager;
+import com.github.noxan.aves.auth.storage.InMemoryUsernamePasswordStorage;
 import com.github.noxan.aves.net.Connection;
 import com.github.noxan.aves.server.ServerHandler;
 import com.github.noxan.aves.server.SocketServer;
@@ -19,6 +21,14 @@ public class ChatServer implements ServerHandler {
     }
 
     private Logger logger = Logger.getLogger(getClass().getName());
+
+    private InMemoryUsernamePasswordStorage storage;
+    private SessionManager sessionManager;
+
+    public ChatServer() {
+        storage = new InMemoryUsernamePasswordStorage();
+        sessionManager = new SessionManager(storage);
+    }
 
     public void start() throws IOException {
         server.start();
