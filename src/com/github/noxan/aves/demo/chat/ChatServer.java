@@ -40,6 +40,16 @@ public class ChatServer implements ServerHandler {
     @Override
     public void readData(Connection connection, Object data) {
         logger.log(Level.INFO, data.toString());
+        String[] parts = data.toString().split(";");
+        try {
+            switch(parts[0]) {
+                default:
+                    logger.log(Level.WARNING, "unknown packet header: " + data.toString());
+                    break;
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
