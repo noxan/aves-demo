@@ -1,6 +1,8 @@
 package com.github.noxan.aves.demo.chat;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.github.noxan.aves.net.Connection;
 import com.github.noxan.aves.server.Server;
@@ -17,27 +19,25 @@ public class ChatServer implements ServerHandler {
         }
     }
 
+    private Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     public void readData(Connection connection, Object data) {
-        // TODO Auto-generated method stub
-
+        logger.log(Level.INFO, data.toString());
     }
 
     @Override
     public void clientConnect(Connection connection) {
-        // TODO Auto-generated method stub
-
+        logger.log(Level.INFO, connection + " connected");
     }
 
     @Override
     public void clientDisconnect(Connection connection) {
-        // TODO Auto-generated method stub
-
+        logger.log(Level.INFO, connection + " disconnected");
     }
 
     @Override
     public void clientLost(Connection connection) {
-        // TODO Auto-generated method stub
-
+        logger.log(Level.INFO, connection + " lost");
     }
 }
