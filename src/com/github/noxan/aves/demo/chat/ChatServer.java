@@ -86,6 +86,7 @@ public class ChatServer implements ServerHandler {
     @Override
     public void clientDisconnect(Connection connection) {
         logger.log(Level.INFO, connection + " disconnected");
+        sessionManager.destroySession(connection);
     }
 
     @Override
