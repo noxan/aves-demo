@@ -50,5 +50,23 @@ public class ChatClient extends ClientAdapter {
         String message = parts[0].toLowerCase();
         String[] args = new String[parts.length - 1];
         System.arraycopy(parts, 1, args, 0, args.length);
+
+        switch(message) {
+            case "login":
+                if(args[0].equals("ok")) {
+                    gui.setStatus(ChatClientStatus.LOGIN);
+                }
+                break;
+            case "chat":
+                if(args.length > 1) {
+                    gui.chat(args[0], args[1]);
+                } else {
+                    System.err.println("invalid message: " + data);
+                }
+                break;
+            default:
+                System.err.println("unknown message: " + data);
+                break;
+        }
     }
 }
