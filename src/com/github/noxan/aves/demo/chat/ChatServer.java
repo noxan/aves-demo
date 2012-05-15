@@ -60,6 +60,15 @@ public class ChatServer implements ServerHandler {
                         connection.write("login;" + e.getMessage());
                     }
                     break;
+                case "logout":
+                    logger.log(Level.INFO, connection + " logged out");
+                    try {
+                        User user = sessionManager.getSession(connection);
+                        server.broadcast(connection, "chat;Server;" + user.getUsername() + " left");
+                    } catch(AuthException ignored) {
+                    }
+                    sessionManager.destroySession(connection);
+                    break;
                 default:
                     logger.log(Level.WARNING, "unknown packet header: " + data.toString());
                     break;
