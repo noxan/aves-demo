@@ -20,6 +20,10 @@ public class ChatServer implements ServerHandler {
 
     private Logger logger = Logger.getLogger(getClass().getName());
 
+    public void start() throws IOException {
+        server.start();
+    }
+
     @Override
     public void readData(Connection connection, Object data) {
         logger.log(Level.INFO, data.toString());
