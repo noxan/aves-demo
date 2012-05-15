@@ -48,6 +48,21 @@ public class ChatClientGUI {
         frame.setVisible(true);
     }
 
+    public void setStatus(ChatClientStatus status) {
+        switch(status) {
+            case LOGIN:
+                ((CardLayout)cards.getLayout()).show(cards, "chat");
+                break;
+            case CONNECT:
+                ((CardLayout)cards.getLayout()).show(cards, "login");
+                break;
+            case DISCONNECT:
+            default:
+                ((CardLayout)cards.getLayout()).show(cards, "connect");
+                break;
+        }
+    }
+
     private class ConnectPanel extends JPanel {
         private static final long serialVersionUID = -8154588851543816456L;
 
