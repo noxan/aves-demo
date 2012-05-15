@@ -60,6 +60,14 @@ public class ChatServer implements ServerHandler {
                         connection.write("login;" + e.getMessage());
                     }
                     break;
+                case "chat":
+                    try {
+                        User user = sessionManager.getSession(connection);
+                        server.broadcast("chat;" + user.getUsername() + ";" + parts[1]);
+                    } catch(AuthException e) {
+                        connection.write("error;" + e.getMessage());
+                    }
+                    break;
                 case "logout":
                     logger.log(Level.INFO, connection + " logged out");
                     try {
