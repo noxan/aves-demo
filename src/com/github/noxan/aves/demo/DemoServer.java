@@ -24,7 +24,7 @@ public class DemoServer implements ServerHandler {
 
     @Override
     public void readData(Connection connection, Object data) {
-        System.out.println(connection + ": " + data);
+        System.out.println(connection + " > " + data);
     }
 
     @Override
@@ -40,5 +40,10 @@ public class DemoServer implements ServerHandler {
     @Override
     public void clientLost(Connection connection) {
         System.out.println(connection + " lost");
+    }
+
+    @Override
+    public void writeData(Connection connection, Object data) {
+        System.out.println(connection + " < " + data);
     }
 }
